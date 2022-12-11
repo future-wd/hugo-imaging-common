@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](/github.com/future-wd/hugo-imaging-common/compare/v0.0.4...v0.0.5) (2022-12-11)
+
+
+### Bug Fixes
+
+* update config ([3037971](/github.com/future-wd/hugo-imaging-common/commit/3037971eacdb8a1a3407e4d03370b6b80e956764))
+
 ### [0.0.4](/github.com/future-wd/hugo-imaging-common/compare/v0.0.3...v0.0.4) (2022-12-11)
 
 
