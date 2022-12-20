@@ -2,6 +2,9 @@
   hri/private/utils/santize-widths.html
   Removed widths that are greater than image width.
   If a width has been removed, adds the image width as a width if img w > difference > largest new width
+  Accepts slice of widths, or slice of maps containing width
+
+  @
 
   @author @sean-au
 
@@ -24,7 +27,7 @@
     .difference - min_width_difference for new width
     .suppress - suppress width warning if true
 
-  @return slice of sanitized image widths
+  @return input with widths too wide removed.
 
   @access private
 
@@ -50,33 +53,52 @@
     {{ if and (gt $.img.Width .) (gt $.img.Height (mul . $.ratio)) }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
-      {{ $removed = true }}
+      {{ if not $removed }}
+        {{ $removed = . }}
+      {{ end }}
     {{ end }}
   {{ else }}
     {{ if gt $.img.Width . }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
-      {{ $removed = true }}
+      {{ if not $removed }}
+        {{ $removed = . }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
 
 
+
 {{ if $removed }}
   {{ $vertical := gt .ratio 1  }}
   {{ $largest := index $new_widths (sub (len $new_widths) 1) | int }}
+  {{ if reflect.IsMap $largest }}
+    {{ $largest = $largest.width }}
+  {{ end }}
   {{ $min := sub $.img.Width $difference }}
   {{ $max_resize_width := $.img.Width }}
   {{ if and $.ratio $vertical }}
     {{ $inverse := div 1 .ratio }}
-    {{ $max_resize_width = mul .img.Height $inverse }}
+    {{ $max_resize_width = mul .img.Height $inverse | int }}
   {{ end }}
   {{ if gt $min $largest }}
-    {{ $new_widths = $new_widths | append ($max_resize_width | int) }}  
+    {{ if reflect.IsMap $removed }}
+      {{ $new_width := merge $removed (dict "width" $max_resize_width ) }}
+      {{ $new_widths = $new_widths | append $new_width }} 
+    {{ else }}
+      {{ $new_widths = $new_widths | append $max_resize_width }}  
+    {{ end }}
   {{ end }}
   {{ if not .suppress }}
-    {{ $old_width := index .widths (sub (len $new_widths) 1) | int }}
+    {{ $old_width := $removed }}
+    {{ if reflect.IsMap $removed }}
+      {{ $old_width = $removed.width }}
+    {{ end }}
     {{ $new_width := index $new_widths (sub (len $new_widths) 1) | int }}
+    {{ if reflect.IsMap $new_width }}
+      {{ $new_width = $new_width.width }}
+    {{ end }}
     {{ if .ratio }}
       {{ $old_height := mul $old_width .ratio | int }}
       {{ $new_height := mul $new_width .ratio | int }}
