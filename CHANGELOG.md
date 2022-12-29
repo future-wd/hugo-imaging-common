@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](/github.com/future-wd/hugo-imaging-common/compare/v0.0.5...v0.0.6) (2022-12-29)
+
+
+### Bug Fixes
+
+* add image fit options for aspect_ratio ([4b50199](/github.com/future-wd/hugo-imaging-common/commit/4b50199768b715f8992e5308d2da747096b8c9f0))
+* change to aspect_ratio ([2391749](/github.com/future-wd/hugo-imaging-common/commit/23917491e31873067fce217d96585c669db12203))
+* remove crop_ratio ([a673c4f](/github.com/future-wd/hugo-imaging-common/commit/a673c4f6992940ba14ad036726e03641f60247e8))
+* remove options error ([63d7f38](/github.com/future-wd/hugo-imaging-common/commit/63d7f38a50c0b0a3bd82cf83e1f58cfc1eff6d6a))
+* restrict width for slice of maps also ([4cde1f1](/github.com/future-wd/hugo-imaging-common/commit/4cde1f1c0664ce1d1233edefa0cfc3011136f9f0))
+
 ### [0.0.5](/github.com/future-wd/hugo-imaging-common/compare/v0.0.4...v0.0.5) (2022-12-11)
 
 
