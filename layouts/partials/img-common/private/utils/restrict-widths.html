@@ -24,7 +24,7 @@
     .ctx - page context
     .img - image resource
     .widths - user provided widths
-    .ratio - ratio for .Fill or .Crop transform
+    .aspect_ratio - ratio for .Fill or .Crop transform
     .difference - min_width_difference for new width
     .suppress - suppress width warning if true
 
@@ -49,9 +49,12 @@
 {{ $difference := site.Params.minWidthDifference | int }}
 {{ $message := false }}
 
-{{ range .widths }}
+{{ range $width := .widths }}
+  {{ if reflect.IsMap $width }}
+    {{ $width = $width.width }}
+  {{ end }}
   {{ if $.aspect_ratio }}
-    {{ if and (gt $.img.Width .) (gt $.img.Height (mul . $.aspect_ratio)) }}
+    {{ if and (gt $.img.Width $width) (gt $.img.Height (mul $width $.aspect_ratio)) }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
       {{ if not $removed }}
@@ -59,7 +62,7 @@
       {{ end }}
     {{ end }}
   {{ else }}
-    {{ if gt $.img.Width . }}
+    {{ if gt $.img.Width $width }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
       {{ if not $removed }}
@@ -72,7 +75,7 @@
 
 
 {{ if $removed }}
-  {{ $vertical := gt .ratio 1  }}
+  {{ $vertical := gt .aspect_ratio 1  }}
   {{ $largest := index $new_widths (sub (len $new_widths) 1) | int }}
   {{ if reflect.IsMap $largest }}
     {{ $largest = $largest.width }}
@@ -80,7 +83,7 @@
   {{ $min := sub $.img.Width $difference }}
   {{ $max_resize_width := $.img.Width }}
   {{ if and $.aspect_ratio $vertical }}
-    {{ $inverse := div 1 .ratio }}
+    {{ $inverse := div 1 .aspect_ratio }}
     {{ $max_resize_width = mul .img.Height $inverse | int }}
   {{ end }}
   {{ if gt $min $largest }}
@@ -100,9 +103,9 @@
     {{ if reflect.IsMap $new_width }}
       {{ $new_width = $new_width.width }}
     {{ end }}
-    {{ if .ratio }}
-      {{ $old_height := mul $old_width .ratio | int }}
-      {{ $new_height := mul $new_width .ratio | int }}
+    {{ if .aspect_ratio }}
+      {{ $old_height := mul $old_width .aspect_ratio | int }}
+      {{ $new_height := mul $new_width .aspect_ratio | int }}
       {{ $message = printf "Source image %s (%dx%dpx) on page %s cannot be resized to %dx%dpx wide. Resized to %dx%dpx" .img.RelPermalink .img.Width .img.Height .ctx.RelPermalink $old_width $old_height $new_width $new_height }}
     {{ else }}
     {{ $message = printf "Source image %s (%dx%dpx) on page %s is not wide enough to resize to %dpx wide. Resized to %dpx wide" .img.RelPermalink .img.Width .img.Height .ctx.RelPermalink $old_width $new_width }}
