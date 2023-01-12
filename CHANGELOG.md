@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](/github.com/future-wd/hugo-imaging-common/compare/v0.0.7...v0.0.8) (2023-01-12)
+
+
+### Bug Fixes
+
+* changed ratio to aspect_ratio ([b1739a8](/github.com/future-wd/hugo-imaging-common/commit/b1739a8319a7f5e984b10aa43eb5afe6fd9eae67))
+
 ### [0.0.7](/github.com/future-wd/hugo-imaging-common/compare/v0.0.6...v0.0.7) (2022-12-29)
 
 ### [0.0.6](/github.com/future-wd/hugo-imaging-common/compare/v0.0.5...v0.0.6) (2022-12-29)
