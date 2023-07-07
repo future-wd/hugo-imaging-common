@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](/github.com/future-wd/hugo-imaging-common/compare/v0.0.8...v0.0.9) (2023-07-07)
+
+
+### Bug Fixes
+
+* image eq width warn fixed ([97fea68](/github.com/future-wd/hugo-imaging-common/commit/97fea6811a3aca5339839bd43b25067a0696db9b))
+
 ### [0.0.8](/github.com/future-wd/hugo-imaging-common/compare/v0.0.7...v0.0.8) (2023-01-12)
 
 
