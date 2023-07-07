@@ -54,7 +54,7 @@
     {{ $width = $width.width }}
   {{ end }}
   {{ if $.aspect_ratio }}
-    {{ if and (gt $.img.Width $width) (gt $.img.Height (mul $width $.aspect_ratio)) }}
+    {{ if and (gt $.img.Width (sub $width 1)) (gt $.img.Height (sub (mul $width $.aspect_ratio) 1)) }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
       {{ if not $removed }}
@@ -62,7 +62,7 @@
       {{ end }}
     {{ end }}
   {{ else }}
-    {{ if gt $.img.Width $width }}
+    {{ if gt $.img.Width (sub $width 1) }}
       {{ $new_widths = $new_widths | append . }}
     {{ else }}
       {{ if not $removed }}
