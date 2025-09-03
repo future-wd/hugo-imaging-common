@@ -1,6 +1,6 @@
 {
   "name": "@future-wd/hugo-imaging-common",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Image processing for hugo - common utils",
   "main": "",
   "scripts": {
